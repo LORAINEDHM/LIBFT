@@ -6,50 +6,33 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 14:34:40 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/24 12:54:46 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/22 20:04:13 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystackm, const char *needle, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t		i;
+	size_t		j;
 
+	if (haystack == NULL || needle == NULL)
+		return (NULL);
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	if (len == 0)
+		return (0);
 	i = 0;
-	if (needle[i] == 0)
-		return ((char*)haystackm);
-	while (haystackm[i] != '\0' && i < len)
+	while (i < len && haystack[i])
 	{
 		j = 0;
-		if (haystackm[i] != needle[j])
-			i++;
-		else
-		{
-			while (needle[j] != '\0' && haystackm[i] == needle[j] && i < len)
-			{
-				i++;
-				j++;
-			}
-			if (needle[j] == '\0')
-				return ((char*)haystackm + i - j);
-			i++;
-		}
+		while (haystack[i + j] == needle[j] &&
+				needle[j] && haystack[i + j] && i + j < len)
+			j++;
+		if (j == ft_strlen(needle) && j != 0)
+			return ((char *)&haystack[i]);
+		i++;
 	}
-	return (0);
+	return (NULL);
 }
-
-/*
-** int main(void)
-** {
-** 	char needle0[] = "dolor";
-** 	char haystackm0[] = "lorem ipsum dolor sit amet";
-** 	size_t len0 = 0;
-** 	printf("%s\n", ft_strnstr(haystackm0, needle0, len0));
-** 	char needle[] = "dolor";
-** 	char haystackm[] = "lorem ipsum dolor sit amet";
-** 	size_t len = 0;
-** 	printf("%s", strnstr(haystackm, needle, len));
-** }
-*/

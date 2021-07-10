@@ -3,30 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduhamel <lduhamel@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 09:16:00 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/10 18:32:19 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/19 16:16:35 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
 	i = 0;
-	while (str[i] != '\0')
+	if (s == NULL)
+		return (0);
+	while (s[i])
 	{
 		i++;
 	}
 	return (i);
 }
-
-/*
-**int main(void)
-**{
-**	printf("%d", ft_strlen("coucou"));
-**}
-*/

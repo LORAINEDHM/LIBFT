@@ -6,24 +6,23 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 18:09:22 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/21 17:12:57 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/22 19:44:49 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(const char *s1)
 {
 	char	*ptr;
 	int		i;
 
-	ptr = NULL;
-	if (!(ptr = (char*)malloc(sizeof(*ptr) * ft_strlen(src) + 1)))
+	if (!s1 || !(ptr = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1))))
 		return (NULL);
 	i = 0;
-	while (src[i] != '\0')
+	while (s1[i])
 	{
-		ptr[i] = src[i];
+		ptr[i] = s1[i];
 		i++;
 	}
 	ptr[i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 08:53:55 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/24 16:24:50 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/22 18:48:25 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 	len = len_s1 - x - ft_ending(s1, set);
 	if (len_s1 == x)
 		len = x;
-	if (!(new = (char*)malloc(sizeof(*new) * len + 1)))
+	if (!(new = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	while (i < len)
 	{
@@ -81,12 +81,3 @@ char			*ft_strtrim(char const *s1, char const *set)
 	new[i] = '\0';
 	return (new);
 }
-
-/*
-** int main(void)
-** {
-** 	char s1[] = "hahaahcoucouahhaaah";
-** 	char set[] = "ah";
-** 	printf("%s", ft_strtrim(s1, set));
-** }
-*/

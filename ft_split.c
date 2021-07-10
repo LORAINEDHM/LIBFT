@@ -6,7 +6,7 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 15:02:01 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/21 16:52:36 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/22 18:55:47 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char		*ft_strndup(const char *src, size_t n)
 	size_t	i;
 
 	ptr = NULL;
-	if (!(ptr = (char*)malloc(sizeof(*ptr) * n + 1)))
+	if (!(ptr = (char*)malloc(sizeof(char) * n + 1)))
 		return (NULL);
 	i = 0;
 	while (src[i] != '\0' && i < n)
@@ -48,16 +48,17 @@ static int		ft_nb_strings(char *s, char c)
 	return (j);
 }
 
-static void		ft_free(char **ptr)
+static void		ft_free(char **ptr, int j)
 {
-	int j;
+	int i;
 
-	j = 0;
-	while (ptr[j] != NULL)
+	i = 0;
+	while (i < j)
 	{
-		free(ptr[j]);
-		j++;
+		free(ptr[i]);
+		i++;
 	}
+	free(ptr);
 }
 
 char			**ft_split(char const *s, char c)
@@ -69,8 +70,8 @@ char			**ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	if (s == NULL || (!(ptr = malloc(sizeof(*ptr) * ft_nb_strings((char *)s, c)
-			+ 1))))
+	if (s == NULL || (!(ptr = (char**)malloc(sizeof(char *) *
+			ft_nb_strings((char *)s, c) + 1))))
 		return (NULL);
 	while (s[i] != '\0' && j < ft_nb_strings((char*)s, c))
 	{
@@ -83,21 +84,8 @@ char			**ft_split(char const *s, char c)
 			i++;
 		}
 		if ((ptr[j++] = ft_strndup(s + i - index, index)) == NULL)
-			ft_free(ptr);
+			ft_free(ptr, j);
 	}
 	ptr[j] = 0;
 	return (ptr);
 }
-
-/*
-** int main(void)
-** {
-**     char *s = " olol                ";
-**     int i = 0;
-**     char **res = ft_split(s, ' ');
-**     while (res[i]) {
-**         printf("%s\n", res[i]);
-**         i++;
-**     }
-** }
-*/

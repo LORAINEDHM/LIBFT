@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lduhamel <lduhamel@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:23:15 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/25 16:35:27 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/04 12:47:59 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,3 @@ int		ft_toupper(int c)
 		return (c - 32);
 	return (c);
 }
-/*
-**int main(void)
-**{
-**	printf("%d", ft_toupper('a'));
-**}
-*/

@@ -6,7 +6,7 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:27:55 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/10/21 16:38:51 by lduhamel         ###   ########.fr       */
+/*   Updated: 2019/11/22 18:56:38 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char				*ft_itoa(int nb)
 
 	str = NULL;
 	sign = 0;
-	if (!(str = (char*)malloc(sizeof(*str) * ft_size(nb) + 1)))
+	if (!(str = (char*)malloc(sizeof(char) * ft_size(nb) + 1)))
 		return (NULL);
 	j = ft_size(nb);
 	if (nb < 0)
@@ -59,12 +59,3 @@ char				*ft_itoa(int nb)
 	}
 	return (str);
 }
-
-/*
-** int main(void)
-** {
-**	int nb;
-**	nb = -145;
-**	printf("%s", ft_itoa(nb));
-** }
-*/
