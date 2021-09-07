@@ -6,86 +6,78 @@
 /*   By: lduhamel <lduhamel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 15:02:01 by lduhamel          #+#    #+#             */
-/*   Updated: 2019/11/22 18:55:47 by lduhamel         ###   ########.fr       */
+/*   Updated: 2021/09/07 14:52:52 by lduhamel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_strndup(const char *src, size_t n)
+static size_t	num_of_words(char const *s, char c)
 {
-	char	*ptr;
 	size_t	i;
 
-	ptr = NULL;
-	if (!(ptr = (char*)malloc(sizeof(char) * n + 1)))
-		return (NULL);
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	while (*s)
 	{
-		ptr[i] = src[i];
-		i++;
+		if (*s != c)
+		{
+			i++;
+			while (*s && *s != c)
+				s++;
+		}
+		else
+			s++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	return (i);
 }
 
-static int		ft_nb_strings(char *s, char c)
+static size_t	get_word_len(char const *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (*s && *s != c)
+	{
+		s++;
+		i++;
+	}
+	return (i);
+}
+
+static char	**ft_clear(char **ptr)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	if (s[i] != c)
-		j = 1;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c && (s[i + 1] != c && s[i + 1] != '\0'))
-			j++;
-		i++;
-	}
-	return (j);
-}
-
-static void		ft_free(char **ptr, int j)
-{
-	int i;
-
-	i = 0;
-	while (i < j)
-	{
-		free(ptr[i]);
-		i++;
-	}
+	while (ptr[i])
+		free(ptr[i++]);
 	free(ptr);
+	return (0);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		j;
-	int		index;
 	char	**ptr;
+	size_t	word_len;
+	size_t	j;
 
-	i = 0;
-	j = 0;
-	if (s == NULL || (!(ptr = (char**)malloc(sizeof(char *) *
-			ft_nb_strings((char *)s, c) + 1))))
+	if (!s)
 		return (NULL);
-	while (s[i] != '\0' && j < ft_nb_strings((char*)s, c))
+	ptr = ft_calloc(sizeof(*ptr), (num_of_words(s, c) + 1));
+	if (!ptr)
+		return (NULL);
+	j = 0;
+	while (*s)
 	{
-		index = 0;
-		while (s[i] == c)
-			i++;
-		while (s[i] != c && s[i] != '\0')
+		if (*s++ != c)
 		{
-			index++;
-			i++;
+			word_len = get_word_len(--s, c);
+			ptr[j] = ft_substr(s, 0, word_len);
+			if (!ptr[j++])
+				return (ft_clear(ptr));
+			s += word_len;
 		}
-		if ((ptr[j++] = ft_strndup(s + i - index, index)) == NULL)
-			ft_free(ptr, j);
 	}
-	ptr[j] = 0;
 	return (ptr);
 }
+
